@@ -1,8 +1,9 @@
 package safraexpress.safraexpress.entity;
 import jakarta.persistence.*;
 import lombok.*;
+import safraexpress.safraexpress.dto.PedidoDadosDTO;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Table(name = "tb_pedido")
 @Entity
@@ -19,8 +20,30 @@ public class Pedido {
         @Column(name = "description", unique = true, nullable = false, columnDefinition = "Text")
         private String description;
 
-        private String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        @Enumerated(EnumType.STRING)
+        private StatusEnum status;
+
+        private LocalDate date;
 
 
+        @ManyToMany
+        @JoinTable(
+                name = "tb_pedido_user",
+                joinColumns = {@JoinColumn(name = "id_pedido", referencedColumnName = "id")},
+                inverseJoinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")}
+        )
+        private List<User> users;
+
+        public Pedido(PedidoDadosDTO dto, List<User> users) {
+                this.users = users;
+                this.description = dto.description();
+                this.status = dto.status();
+                this.date = LocalDate.now();
+        }
+        public Pedido(PedidoDadosDTO dto) {
+                this.description = dto.description();
+                this.status = dto.status();
+                this.date = LocalDate.now();
+        }
 
 }

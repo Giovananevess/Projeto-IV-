@@ -1,8 +1,7 @@
-package safraexpress.safraexpress.enums;
+package safraexpress.safraexpress.entity;
 
 import lombok.Getter;
 
-@Getter
 public enum TipoUserEnum {
     AGRICULTOR,
     MOTORISTA

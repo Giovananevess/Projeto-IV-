@@ -7,11 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 import safraexpress.safraexpress.dto.DadosUserDTO;
-import safraexpress.safraexpress.enums.StatusEnum;
-import safraexpress.safraexpress.enums.TipoUserEnum;
 import java.util.List;
-
 
 @Table(name = "tb_user")
 @Entity
@@ -24,15 +22,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
+    @Length(max = 90)
     private String name;
-
-    @Enumerated(EnumType.STRING)
-    private TipoUserEnum tipoUser;
 
     @Email
     private String email;
 
     private String telefone;
+
+    @Enumerated(EnumType.STRING)
+    private TipoUserEnum tipouser;
 
     @Embedded
     private Endereco endereco;
@@ -48,17 +48,17 @@ public class User {
     public User(DadosUserDTO dto, List<Pedido> pedidos) {
         this.pedidos = pedidos;
         this.name = dto.name();
-        this.tipoUser = getTipoUser();
         this.email = dto.email();
         this.telefone = dto.telefone();
+        this.tipouser = dto.tipouser();
         this.endereco = getEndereco();
     }
 
     public User(DadosUserDTO dto) {
         this.name = dto.name();
-        this.tipoUser = getTipoUser();
         this.email = dto.email();
         this.telefone = dto.telefone();
+        this.tipouser = dto.tipouser();
         this.endereco = getEndereco();
 
     }
