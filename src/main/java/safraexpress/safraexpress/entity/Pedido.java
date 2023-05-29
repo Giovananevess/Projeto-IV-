@@ -17,7 +17,7 @@ public class Pedido {
         @GeneratedValue(strategy = GenerationType.AUTO)
         private Long id;
 
-        @Column(name = "description", unique = true, nullable = false, columnDefinition = "Text")
+        @Column(name = "description", nullable = false, columnDefinition = "Text")
         private String description;
 
         @Enumerated(EnumType.STRING)
@@ -25,17 +25,16 @@ public class Pedido {
 
         private LocalDate date;
 
-
-        @ManyToMany
-        @JoinTable(
-                name = "tb_pedido_user",
-                joinColumns = {@JoinColumn(name = "id_pedido", referencedColumnName = "id")},
-                inverseJoinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")}
-        )
-        private List<User> users;
+//        @ManyToMany
+//        @JoinTable(
+//                name = "tb_pedido_user",
+//                joinColumns = {@JoinColumn(name = "id_pedido", referencedColumnName = "id")},
+//                inverseJoinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")}
+//        )
+//        private List<User> users;
 
         public Pedido(PedidoDadosDTO dto, List<User> users) {
-                this.users = users;
+//                this.users = users;
                 this.description = dto.description();
                 this.status = dto.status();
                 this.date = LocalDate.now();

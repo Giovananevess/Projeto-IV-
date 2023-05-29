@@ -1,8 +1,7 @@
-package safraexpress.safraexpress.dto;
+package safraexpress.safraexpress.entity;
 
 
-public record DadosEnderecoDTO(
-
+public record DadosEndereco(
         String logradouro,
 
         String bairro,
@@ -13,6 +12,5 @@ public record DadosEnderecoDTO(
 
         String uf,
         String complemento,
-        String numero
-) {
+        String numero) {
 }
