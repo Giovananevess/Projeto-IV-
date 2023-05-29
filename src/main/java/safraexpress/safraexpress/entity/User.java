@@ -31,12 +31,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private TipoUserEnum tipouser;
 
-    @Embedded
-    private Endereco endereco;
+//    @Embedded
+//    private Endereco endereco;
 
     private String cep;
+    private String logradouro;
+    private String complemento;
+    private String bairro;
+    private String localidade;
+    private String uf;
 
-//    @ManyToMany
+
+    //    @ManyToMany
 //    @JoinTable(
 //            name = "tb_user_pedido",
 //            joinColumns = {@JoinColumn(name = "id_user", referencedColumnName = "id")},
@@ -53,12 +59,12 @@ public class User {
 //        this.endereco = getEndereco();
 //    }
     public User(DadosUserDTO dto) {
-        this.cep = dto.cep();
         this.name = dto.name();
         this.email = dto.email();
         this.telefone = dto.telefone();
         this.tipouser = dto.tipouser();
-        this.endereco = new Endereco(dto.endereco());
+//        this.endereco = new Endereco(dto.endereco());
+        this.cep = dto.cep();
     }
 
 }
